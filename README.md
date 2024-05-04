@@ -1,7 +1,8 @@
 
 # Pomodoro Log 
 
-PomodoroLogCLI" is a command-line application designed to enhance productivity using the Pomodoro technique. Users can easily manage their work sessions and breaks through a simple interface in their terminal. The application allows users to set customizable timers for work and break intervals, following the Pomodoro method's structure of focused work sessions punctuated by short breaks.
+(Work in progress)<br>
+DeepFocusTimer is a command-line application designed to enhance productivity using the Pomodoro technique. Users can easily manage their work sessions and breaks through a simple interface in their terminal. The application allows users to set customizable timers for work and break intervals, following the Pomodoro method's structure of focused work sessions punctuated by short breaks.
 
 Will be coded in C++
 
