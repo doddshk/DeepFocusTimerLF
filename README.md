@@ -29,3 +29,5 @@ After the user is finished studying, a timer alarm will play and the user will b
 - Body (Other comments about the study session)
 
 After the user inputs these things, the application will save it in a file and be viewable in the calender. 
+
+Forward looking: maybe have it input the focus, pomodoro time, in your google calender. Have it sync. 
