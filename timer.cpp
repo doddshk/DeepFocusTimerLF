@@ -1,9 +1,14 @@
-#include <chrono>   // Time library
-#include <cstdlib>  //unsure
+#include <chrono>  // Time library
+#include <cstdlib> //unsure
+#include <fstream>
 #include <iostream> //stdio
-#include <thread>   //generate threads
+#include <string>
+#include <thread> //generate threads
 
-void timer(int duration) {
+void recordTask(std::string *task, std::string *notes);
+int saveTask(std::string *task, std::string *notes);
+
+int timer(int duration) {
   while (duration > 0) {
     std::this_thread::sleep_for(
         std::chrono::milliseconds(1000)); // sleep for 1 seconds
@@ -11,18 +16,22 @@ void timer(int duration) {
     std::cout << duration << std::endl;
     duration--;
   };
-  system("afplay alarm.wav");
+
+  system("afplay alarm.wav &");
+  std::this_thread::sleep_for(std::chrono::milliseconds(4000));
+  return 0;
 }
 
-void recordTask(char *task, char *notes) {
-  std::cout << "What did you in this hour?" << std::endl;
-  std::cin >> *task;
-  std::cout << "Notes:" << std::endl;
-  std::cin >> *notes;
+void recordTask(std::string *task, std::string *notes) {
+  std::cout << "Task: " << std::endl;
+  std::getline(std::cin, *task);
+  std::cout << "Notes: " << std::endl;
+  std::getline(std::cin, *notes);
 }
 
-void saveTask() {
-  FILE *pFile;
+int saveTask(std::string *task, std::string *notes) {
+
+  // get the name for the file
   auto now = std::chrono::system_clock::now(); // Gets system time
   std::time_t time_now = std::chrono::system_clock::to_time_t(
       now); // Converts system time into time_t var
@@ -33,11 +42,31 @@ void saveTask() {
   int day = local_time->tm_mday;
   int hour = local_time->tm_hour;
   int min = local_time->tm_min;
-  std::cout << year << month << day << hour << min << std::endl;
+  std::string file_name = std::to_string(hour) + ":" + std::to_string(min);
+
+  // get string size.
+  int full_size = sizeof(*task) + sizeof(*notes);
+
+  // init the output file with its location and file name
+  std::ofstream output_file(std::to_string(year) + "/" + std::to_string(day) +
+                            "/" + file_name);
+
+  // check if fail
+  if (!output_file.is_open()) {
+    perror("malloc failed");
+    return 1;
+  }
+
+  // Write to the output_file with the task and the notes
+  output_file << *task << ": \n" << *notes << std::endl;
+
+  return 0;
 }
 
 int main() {
-  timer(10);
-  saveTask();
-  return 0;
+  timer(3600);
+  std::string task;
+  std::string notes;
+  recordTask(&task, &notes);
+  saveTask(&task, &notes);
 }
