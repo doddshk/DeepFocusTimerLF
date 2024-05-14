@@ -48,8 +48,8 @@ int saveTask(std::string *task, std::string *notes) {
   int full_size = sizeof(*task) + sizeof(*notes);
 
   // init the output file with its location and file name
-  std::ofstream output_file(std::to_string(year) + "/" + std::to_string(day) +
-                            "/" + file_name);
+  std::ofstream output_file(std::to_string(year) + "/" + std::to_string(month) +
+                            "." + std::to_string(day) + "/" + file_name);
 
   // check if fail
   if (!output_file.is_open()) {
