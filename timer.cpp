@@ -8,13 +8,15 @@
 void recordTask(std::string *task, std::string *notes);
 int saveTask(std::string *task, std::string *notes);
 
-int timer(int duration) {
-  while (duration > 0) {
+int timer(int sec) {
+  while (sec > 0) {
+    int minutes = sec / 60;
+    int seconds = sec % 60;
     std::this_thread::sleep_for(
         std::chrono::milliseconds(1000)); // sleep for 1 seconds
     std::system("clear");
-    std::cout << duration << std::endl;
-    duration--;
+    std::cout << minutes << ":" << seconds << std::endl;
+    sec--;
   };
 
   system("afplay alarm.wav &");
@@ -64,7 +66,7 @@ int saveTask(std::string *task, std::string *notes) {
 }
 
 int main() {
-  timer(3600);
+  timer(80);
   std::string task;
   std::string notes;
   recordTask(&task, &notes);
