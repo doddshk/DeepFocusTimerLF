@@ -72,3 +72,11 @@ int main() {
   recordTask(&task, &notes);
   saveTask(&task, &notes);
 }
+
+// TODO
+// pause function
+// prevent text from being read while the timer is active
+// GUI (maybe in qt?)
+// streak system
+// way to visualize streak system, like a calander
+// lazyvim like mainscreen
