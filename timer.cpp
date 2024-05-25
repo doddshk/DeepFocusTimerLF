@@ -15,7 +15,7 @@ int timer(int sec) {
     std::this_thread::sleep_for(
         std::chrono::milliseconds(1000)); // sleep for 1 seconds
     std::system("clear");
-    std::cout << minutes << ":" << seconds << std::endl;
+    std::cout << "Time Remaining: "<< minutes << ":" << seconds << std::endl;
     sec--;
   };
 
